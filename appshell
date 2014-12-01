@@ -1,0 +1,97 @@
+#!/bin/sh
+set -x
+
+Parameter_num=$#
+Parameter_one=$1
+PathNow=`dirname $0`  #当前执行appshell的路径
+PathInstall="/opt/app"
+LastValue=
+IpkName="dropbox*.ipk"
+
+#1，判断参数是否合法
+FunParamLegal()
+{
+	if [ ${Parameter_num} -ne 1 ];then
+		echo "Fail:Parameter Err."
+		exit 1
+	fi
+}
+
+
+#安装函数
+Install()
+{
+	local L_ExitStatus=0
+
+	#进入当前 appshell 的目录
+	cd ${PathNow}
+	
+	#查看/opt/app 目录是否存在 ,如果不存在则创建这样一个目录
+	if [ ! -d "${PathInstall}" ];then
+		mkdir -p ${PathInstall}
+	fi
+	
+	#ipk 文件存在
+	if [ -f ${IpkName} ];then
+		tar xzvf ${IpkName} -C ${PathInstall}
+		LastValue=$?
+		if [ ${LastValue} -eq 0 ];then
+				ln -sf /opt/app/dropbox/lib/libcurl.so.4 /usr/lib/libcurl.so.4
+
+			echo "Success."
+			L_ExitStatus=0
+		else
+			echo "Fail:Install Err."
+			L_ExitStatus=3
+		fi
+	else
+		echo "Fail:Install file is not exist."
+		L_ExitStatus=2
+	fi
+	cd -
+
+	
+	exit ${L_ExitStatus}
+}
+
+#卸载函数
+unInstall()
+{
+
+	#进入当前 appshell 的目录
+	cd ${PathNow}
+		rm  -fr ../dropbox
+	cd -
+	
+	#删除其他软连接
+	rm -f /usr/lib/libcurl.so.4
+	sed -i '/dropbox/d' /etc/crontabs/root
+	sed -i '/dropbox/d' /etc/mjpg-streamer.conf
+	sync
+	/etc/init.d/cron restart &
+	exit ${L_ExitStatus}
+}
+
+#主函数
+Main()
+{
+	#安装
+	if [ "${Parameter_one}" = "install" ];then
+		Install
+	
+	#卸载
+	elif [ "${Parameter_one}" = "uninstall" ];then
+		unInstall
+	
+ 	#输入参数错误
+	else
+		echo "ERR:Parameter Err."
+		exit 1	
+	fi
+}
+
+#检查参数是否合法
+FunParamLegal
+
+#执行主函数
+Main

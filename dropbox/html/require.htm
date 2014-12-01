@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Dropbox网盘备份</title>
+		<script type='text/javascript' src='jqscripts'></script>
+		<script type='text/javascript' src='jsscripts'></script>
+		<style type='text/css'>
+			*{
+				 
+				padding:0 0;
+				 
+			}
+
+			a{
+				text-decoration:none;
+			}
+			
+			body{
+				background:#ededed;
+			}
+
+			.nav{
+				height:63px;
+				background:url('comimg?path=title_box.jpg') repeat-x center;
+			}
+
+			.common {
+				width: 940px;
+				margin: 0 auto;
+			}
+
+			.nav .nav_head .logo{
+				display: block;
+				 
+				float:left;
+				margin-top:10px;
+				width:112px;
+				height:40px;
+				background: url('comimg?path=logo2.png') no-repeat center;
+			}
+
+			.navigation {
+				width: 940px;
+				height: 54px;
+				margin: 54px auto;
+				background: url('comimg?path=fast_box.png') no-repeat center;
+			}
+
+			.navigation .navigation_title {
+				color: #666;
+				padding-top: 15px;
+				padding-left: 17px;
+			}
+
+			.navigation .navigation_title a{
+				color:#666;
+			}
+
+			.download_content{
+				width:940px;
+				height:500px;
+				background:white;
+				border:1px solid #CCC;
+				margin:0 auto;
+			}
+
+			.download_box{
+				width:800px;
+				height:auto;
+				padding-top:0px;
+				padding-left:50px;
+				color:#666;
+				float:left;
+			}
+
+			.download_sel{
+				width:100px;
+			}
+			.download_input{
+				width:260px;
+			}
+
+			.save_btn{
+				display:block;
+				width:66px;
+				height:26px;
+				background: url('comimg?path=button1.png') no-repeat center;
+				text-align: center;
+				margin-left:15px;
+			}
+
+			.save_btn:hover{
+				background: url('comimg?path=click_button1.png') no-repeat center;
+			}
+
+			.save_btn b{
+				display: block;
+				color:white;
+				font-weight:300;
+				padding-top:6px;
+				font-size:12px;
+			}
+
+			.l_btn{
+				float:right;
+			}
+			.r_btn{
+				float:right;
+			}
+			.download_play{
+				width:220px;
+				float:left;
+				margin-top:20px;
+			}
+
+			.aria2_mention{
+				display: block;
+				margin-left:15px;
+				color:red;
+			}
+		</style>
+	</head>
+	<body>
+
+
+		<div class='nav'>
+			<div class='nav_head common'>
+				<a href='http://r.xcloud.cc' target='_blank' class='logo'></a>
+				<span class='version'></span>
+				<a href='javascript:void(0)' id='getupdate' class='getupdate'><span class='getupdate_def'></span></a>
+				<span class='updatewords'></span>
+			</div>
+		</div>
+
+		<div class="navigation">
+			<div class="navigation_title">
+				<a href="comreturn">主页</a> >> Dropbox网盘备份
+			</div>
+		</div>
+
+		<div class="download_content"  style="background:url(comskip?page=/opt/app/dropbox/html/bgimg1.png) no-repeat 700px 30px #FFFFFF">
+			<div class="download_box">
+				 <p><img src="comskip?page=/opt/app/dropbox/html/logo.png" width="40" height="40">这是您首次使用本插件，请先按以下步骤配置Dropbox帐号关联.</p>
+
+ <p>1) 在浏览器中打开 <a href="https://www2.dropbox.com/developers/apps" target="_blank">https://www2.dropbox.com/developers/apps</a> 并使用您的帐户登录</p>
+ <p>2) 点击 "Create App"按钮后, 选择 "Dropbox API app"</p>
+ <p>3) 选择 "Files and datastores"后，继续选 "No" ,然后 "All file types"</p>
+ <p>4)  在 "App Name" 文本框中输入一个未被使用过的新名字 (例如： MyXcloud12345678)</p>
+
+ <p>5) 点击 "Create App" 按钮创建新dropbox应用.</p>
+
+ <p>6) 创建成功后，在新APP的设置页核对 "Permission type" 项已被设置为 "Full Dropbox"</p>
+ <p>7) 将 "App key" 和 "App secret" 的值输入至下面对应的文本框中</p>
+ <p>8) 如果本路由器无法直接访问Dropbox,请设置代理服务器，如果能直接访问请不要填写</p>
+				<table width="800" border="0">
+				  
+				  <tr>
+				    <th align="right" scope="row">APPKEY:</th>
+				    <td><input type='text' name='appkey_num' class='appkey_num download_input' value=''></td>
+				    <td>(必填)</td>
+			      </tr>
+				  <tr>
+				    <th align="right" scope="row"><span>APPSECRET:</span></th>
+				    <td><input type='text' name='appsecret_num' class='appsecret_num download_input' value=''></td>
+				    <td> (必填) </td>
+			      </tr>
+                  <tr>
+				    <th width="237" align="right" scope="row">Proxy:</th>
+				    <td width="269"><input type='text' name='proxy' class='proxy download_input' value=''></td>
+				    <td width="270">(按protocol://host:port格式)</td>
+			      </tr>
+				  <tr>
+				    <th colspan="3" align="center" scope="row"><div class='accept_url'></div> </th>
+			      </tr>
+				  <tr>
+				    <th align="center" scope="row">&nbsp;</th>
+                        <th align="center" scope="row">
+                    <a href='javascript:void(0)' rel='save' class='l_btn save_btn' style='visibility:hidden'><b>保存</b></a><a href='javascript:void(0)' rel='require' class='r_btn save_btn'><b>确定</b></a>
+                    
+                    </th>
+				    <th align="center" scope="row">&nbsp;</th>
+			      </tr>
+			  </table>
+				
+				
+				
+				
+		  </div>
+		 
+		</div>
+	</body>
+	<script type='text/javascript'>
+	var oauthkey="";
+			var oauthsec="";
+	               $('.save_btn').live('click',function(){
+					       var mask="<div id='m'></div>";
+              var loading="<div id='lo'><img src='/luci-static/bootstrap/pending.gif'/></div>"
+               $("body").prepend(loading).prepend(mask);
+               $("#lo").css("position","absolute").css("background-color","#fff").css("text-align","center").css("z-index","9999").css("top","471px").css("left",$(document).width()/2-20);
+               $("#m").width($(document).width()).height($(document).height()).css("background-color","#fff").css("filter","alpha(opacity=60)").css("-moz-opacity","0.4").css("opacity","0.5").css("position","absolute").css("z-index","10");
+			   
+			var flag = $(this).attr('rel');
+			var proxy = $('.proxy').val();
+			var appkey = $('.appkey_num').val();
+			var appsec = $('.appsecret_num').val();
+			
+			if(flag == 'save'){
+			   $.ajax({
+				url:'comcmd',
+				data:{cmd:'/opt/app/dropbox/bin/writeconfig.sh '+appkey+' '+appsec+' '+proxy+' '+oauthsec+' '+oauthkey},
+				dataType:'json',
+				type:'post',
+				success:function(r){
+					var res = r.resdata;  //alert(res);
+					document.getElementById("m").style.display="none";
+				  document.getElementById("lo").style.display="none";
+				  if (res == "OK"){
+					  window.location.href="comskip?page=/opt/app/dropbox/html/upload.htm";
+				  }
+				  else{
+					   $('.accept_url').html('连接错误，请点击"确定"重新生成动态链接');
+					   $('.l_btn').css("visibility","hidden");
+				  }
+				}
+			})
+		  }
+			
+      if(flag == 'require'){
+   
+	         $.ajax({
+				url:'comcmd',
+				data:{cmd:'/opt/app/dropbox/bin/require.sh '+appkey+' '+appsec+' '+proxy},
+				dataType:'json',
+				type:'post',
+				success:function(r){
+					var res = r.resdata; //alert(res);
+					var o = res.split("\n");
+					oauthsec=o[1];
+					oauthkey=o[2];
+					//alert(o[1]);
+				  document.getElementById("m").style.display="none";
+				  document.getElementById("lo").style.display="none";
+				  if (o[0]== "FAILED"){
+					  $('.accept_url').html('错误，请确保dropbox可以访问并检查APPKEY与APPSECRERT是否正确');
+				  }
+				  else{
+				  $('.accept_url').html('请打开<a href='+o[0]+' target="_blank">'+o[0]+'</a><br> 选择允许后返回本页点击"保存"按钮');
+				  $('.l_btn').css("visibility","visible");
+				  }
+				}
+			})
+			}
+		})
+
+
+
+
+          
+ 
+	</script>
+
+ 
+</html>

@@ -1,0 +1,21 @@
+﻿plugin_ID:555
+plugin_Name:Dropbox
+plugin_VersionName: 1.0.11.16
+plugin_VersionCode: 01000000
+plugin_RomVersionH: 9.9.9.9
+plugin_RomVersionL: 1.0.0.7
+plugin_MobVersionH: 9.9
+plugin_MobVersionL: 1.0
+plugin_XPKGVersion: 1.0
+plugin_IntallPath: /opt/app/dropbox/
+plugin_Source: 1
+plugin_Autorun: 0
+plugin_Space: 1292028
+plugin_MD5: 8481365d50a2db5a21ff02fb7f912315
+plugin_Info: Dropbox网盘备份
+plugin_Author:  zerro.h
+plugin_Officeapp: 0
+plugin_State: 2
+plugin_Largeicon:/opt/app/dropbox/icon/large.jpg
+plugin_Smallicon:/opt/app/dropbox/icon/small.png
+plugin_InstallDate:2011-09-09

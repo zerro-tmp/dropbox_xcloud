@@ -1,0 +1,32 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<title>插件配置文件测试</title>
+		<script type='text/javascript' src='jqscripts'></script>
+		<script type='text/javascript' src='jsscripts'></script>
+
+ 
+	</head>
+	<body>
+		<script type='text/javascript'>
+			var getcode = "";
+
+			$.ajax({
+				url:'comcmd',
+				data:{cmd:'ls /opt/app/dropbox/etc/config'},
+				dataType:'json',
+				type:'post',
+				success:function(r){
+					var res = r.resdata; //alert(res);
+					if (res.length>9){
+						window.location.href="comskip?page=/opt/app/dropbox/html/upload.htm";
+					}else{
+						window.location.href="comskip?page=/opt/app/dropbox/html/require.htm";
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
+
+

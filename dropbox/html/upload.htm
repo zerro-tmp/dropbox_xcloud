@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+		<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Dropbox网盘备份</title>
+		<script type='text/javascript' src='jqscripts'></script>
+		<script type='text/javascript' src='jsscripts'></script>
+		<style type='text/css'>
+* {
+	padding: 0 0;
+}
+a {
+	text-decoration: none;
+}
+body {
+	background: #ededed;
+}
+.nav {
+	height: 63px;
+	background: url('comimg?path=title_box.jpg') repeat-x center;
+}
+.common {
+	width: 940px;
+	margin: 0 auto;
+}
+.nav .nav_head .logo {
+	display: block;
+	float: left;
+	margin-top: 10px;
+	width: 112px;
+	height: 40px;
+	background: url('comimg?path=logo2.png') no-repeat center;
+}
+.navigation {
+	width: 940px;
+	height: 54px;
+	margin: 54px auto;
+	background: url('comimg?path=fast_box.png') no-repeat center;
+}
+.navigation .navigation_title {
+	color: #666;
+	padding-top: 15px;
+	padding-left: 17px;
+}
+.navigation .navigation_title a {
+	color: #666;
+}
+ 
+.download_box {
+	width: 940px;
+	height: auto;
+	background: white;
+	border: 1px solid #CCC;
+	margin: 0 auto;
+}
+.download_sel {
+	width: 100px;
+}
+.download_input {
+	width: 260px;
+}
+.save_btn {
+	display: block;
+	width: 66px;
+	height: 26px;
+	background: url('comimg?path=button1.png') no-repeat center;
+	text-align: center;
+	margin-left: 15px;
+}
+.save_btn:hover {
+	background: url('comimg?path=click_button1.png') no-repeat center;
+}
+.save_btn b {
+	display: block;
+	color: white;
+	font-weight: 300;
+	padding-top: 6px;
+	font-size: 12px;
+}
+
+._btn {
+	display: inline-block;
+	width: 40px;
+	height: 16px;
+	text-align: center;
+ 	color: white;
+	padding-top: 2px;
+	font-size: 12px;
+}
+
+.l_btn {
+	float: right;
+}
+.r_btn {
+	float: right;
+}
+.download_play {
+	width: 220px;
+	float: left;
+	margin-top: 20px;
+}
+.aria2_mention {
+	display: block;
+	margin-left: 15px;
+	color: red;
+}
+</style>
+		</head>
+		<body>
+<div class='nav'>
+          <div class='nav_head common'> <a href='http://r.xcloud.cc' target='_blank' class='logo'></a> <span class='version'></span> <a href='javascript:void(0)' id='getupdate' class='getupdate'><span class='getupdate_def'></span></a> <span class='updatewords'></span> </div>
+        </div>
+<div class="navigation">
+          <div class="navigation_title"> <a href="comreturn">主页</a> >> Dropbox网盘备份 </div>
+        </div>
+<script type="text/javascript">
+function selValue(){
+	document.getElementById("divValue").style.display = "block";
+}
+function closeDiv(isSave){
+	if(isSave){
+		var result = [];
+		var chk = document.getElementsByName("chk");
+		for(var i=0; i<chk.length; i++){
+			if(chk[i].checked)
+				result.push(chk[i].value);
+		}
+		document.getElementById("localdir").value = result.join(",");
+	}
+	document.getElementById("divValue").style.display = "none";
+}
+</script>
+          <div class="download_box" style="background:url(comskip?page=/opt/app/dropbox/html/bgimg2.png) no-repeat 640px 230px #FFFFFF">
+    <p style="margin-left:40px;"><img src="comskip?page=/opt/app/dropbox/html/logo.png" width="40" height="40">请配置Dropbox备份选项.</p>
+    <table width="800" border="0">
+              <tr>
+        <th align="right" scope="row">本地目录/文件:</th>
+        <td colspan="2"><input type='text' id='localdir' class='localdir download_input' value=''>
+<div id="divValue" style="display:none;position:absolute; width:auto; height:auto; border:1px solid #006699; background:#F5F6FB; padding:5px;">
+    	
+       
+    </div>
+</td>
+        <td><a href="javascript:selValue();" class="_btn"  style="background-color:#1C9BDB">选择</a>    
+(必填  以,分割多个)</td>
+      </tr>
+              <tr>
+        <th align="right" scope="row"><span>Dropbox远程目录:</span></th>
+        <td colspan="2"><input type='text' id='remotedir' class='remotedir download_input' value=''></td>
+        <td> (必填) </td>
+      </tr>
+              <tr>
+        <th width="235" align="right" scope="row">Proxy:</th>
+        <td colspan="2"><input type='text' id='proxy' class='proxy download_input' value=''></td>
+        <td width="299">(按protocol://host:port格式)</td>
+      </tr>
+              <tr>
+        <th align="right" scope="row">执行方式：</th>
+        <td colspan="2"><p>
+            <input type="checkbox" name="runnow" value="runnow" id="runnow">
+            立即 <br>
+            <input type="checkbox" name="runeach" value="runeach" id="runeach">
+            计划任务,每天
+            <select class='configtime'>
+              <option value="0">0:00</option>
+              <option value="1">1:00</option>
+              <option value="2">2:00</option>
+              <option value="3" selected>3:00</option>
+              <option value="4">4:00</option>
+              <option value="5">5:00</option>
+              <option value="6">6:00</option>
+              <option value="7">7:00</option>
+              <option value="8">8:00</option>
+              <option value="9">9:00</option>
+              <option value="10">10:00</option>
+              <option value="11">11:00</option>
+              <option value="12">12:00</option>
+              <option value="13">13:00</option>
+              <option value="14">14:00</option>
+              <option value="15">15:00</option>
+              <option value="16">16:00</option>
+              <option value="17">17:00</option>
+              <option value="18">18:00</option>
+              <option value="19">19:00</option>
+              <option value="20">20:00</option>
+              <option value="21">21:00</option>
+              <option value="22">22:00</option>
+              <option value="23">23:00</option>
+            </select>
+            执行 <br>
+          </p></td>
+        <td>&nbsp;</td>
+      </tr>
+              <tr>
+        <th align="right" scope="row">模式：</th>
+        <td colspan="2"><script language="javascript"> 
+	         
+</script> 
+                  </script>
+                  <input type="radio" name="r_type" id="r_type" checked value="0">
+                  备份
+                  <input type="radio" name ="r_type" id="r_type" value="1">
+                  恢复备份 </td>
+        <td>&nbsp;</td>
+      </tr>
+              <tr>
+        <th align="center" scope="row">&nbsp;</th>
+        <th width="130" align="center" scope="row"> <a href='javascript:void(0)' rel='save' class='r_btn save_btn'><b>确定</b></a> </th>
+        <th width="118" align="center" scope="row">&nbsp;</th>
+        <th align="center" scope="row">&nbsp;</th>
+      </tr>
+              <tr>
+        <th colspan="4" align="center" scope="row"> <div id="resText" align="left" style="width: 700px;height:200px; overflow:auto;"></div>
+                </th>
+      </tr>
+            </table>
+  
+        </div>
+</body>
+		<script type='text/javascript'>
+		
+						
+	 $.ajax({
+			url:'comcmd',
+			data:{cmd:'/usr/local/localshell/usbdir BASE'},
+			dataType:'json',
+			success:function(r){
+				var data = r.resdata;
+				var ndata = data.split("||||");
+				ndata.pop();
+				
+				var tmp = "";
+				var html = null;
+				for (var i=0; i<ndata.length; i++){
+					tmp = ndata[i];
+					tmp = tmp.substr(tmp.length-1,1);
+					//if (tmp != "/"){
+						html = "<input type='checkbox' name='chk' value='/"+ndata[i]+"'><span class='file_name'>/"+ndata[i]+"</span><br>";
+
+						$('#divValue').append(html);
+					//}
+				}
+		$('#divValue').append(' <a href="javascript:closeDiv(true);" class="_btn" style="background-color:#1C9BDB">确定</a>&nbsp;&nbsp;<a href="javascript:closeDiv(false)" class="_btn"  style="background-color:#FC9F2D">取消</a><br>');		
+			}
+		})	
+		
+		
+	var tmp = null
+        var tmp1 = null
+	var display=0;
+			      var mask="<div id='m'></div>";
+              var loading="<div id='lo'><img src='/luci-static/bootstrap/pending.gif'/></div>"
+               $("body").prepend(loading).prepend(mask);
+               $("#lo").css("position","absolute").css("background-color","#fff").css("text-align","center").css("z-index","9999").css("top","471px").css("left",$(document).width()/2-20);
+               $("#m").width($(document).width()).height($(document).height()).css("background-color","#fff").css("filter","alpha(opacity=60)").css("-moz-opacity","0.4").css("opacity","0.5").css("position","absolute").css("z-index","10");
+        $(document).ready(function () {
+                        
+         $.ajax({
+                    url: 'comcmd',
+                    data: { cmd: '/opt/app/dropbox/bin/action.sh'},
+                    dataType: 'json',
+                    type: 'post',
+                    success: function (r) {
+                        tmp = r.resdata; //alert(tmp);
+                        tmp1 = tmp.split("\n");
+                      $("#localdir").val(tmp1[0]);
+                      $("#remotedir").val(tmp1[1]);		              
+                      $("#proxy").val(tmp1[2]);
+
+                  if(tmp1[3]>=0){   
+			$('.configtime').val(tmp1[3]);
+			//alert($('.configtime').val()); 
+		}	
+
+		if(tmp1[4]==1){ 
+ 
+			$("input[name=r_type]:eq(1)").attr("checked",'checked');
+			//alert($('input:radio[name=r_type]:checked').val());
+		}				
+		if(tmp1[5]==1){ 
+ 
+			$('#runeach').attr("checked",'checked');
+			
+		}
+		//alert($('#runeach').attr('value')); 
+
+                      }
+                      
+                    })
+						
+				   document.getElementById("m").style.display="none";
+				   document.getElementById("lo").style.display="none";
+                });
+	
+		$('.save_btn').live('click',function(){ 
+			document.getElementById("m").style.display="block";
+		    document.getElementById("lo").style.display="block";
+			var flag = $(this).attr('rel');
+			var proxy = $('.proxy').val();
+			var local_dir = $('.localdir').val();
+			var remote_dir = $('.remotedir').val();
+			var act_time = $('.configtime').val();
+			var act_mode = $('input:radio[name=r_type]:checked').val();
+			var cron=0;
+			if($('#runeach').attr("checked")){
+   				cron=1;  
+   			}else{
+				cron=0; 
+			}
+			//alert('/opt/app/dropbox/bin/action.sh '+local_dir+' '+remote_dir+' '+proxy+' '+act_time+' '+act_mode+' '+cron );
+		     if(flag == 'save'){
+			$.ajax({
+				url:'comcmd',
+				data:{cmd:'/opt/app/dropbox/bin/action.sh '+local_dir+' '+remote_dir+' '+proxy+' '+act_time+' '+act_mode+' '+cron },
+				dataType:'json',
+				type:'post',
+				success:function(r){
+					var res = r.resdata;  
+				    document.getElementById("m").style.display="none";
+				    document.getElementById("lo").style.display="none";
+					alert("已保存设置");
+		        if($('#runnow').attr("checked")){
+					$("#resText").html("后台正在执行操作...");
+					display=1;
+					setInterval("startRequest()",1000);
+ 			     	$.ajax({
+						url:'comcmd',
+						data:{cmd:'/opt/app/dropbox/bin/run.sh>/tmp/dropbox.res &'},
+						dataType:'json',
+						type:'post',
+						success:function(r){
+							var res = r.resdata;  //alert(res);
+						}
+					})
+		        }
+				}
+			});
+
+		     }
+
+	      })
+              
+ 	function startRequest()
+  	 {
+   		if(display>0){
+   				$.ajax({
+				url:'comcmd',
+				data:{cmd:'cat /tmp/dropbox.res'},
+				dataType:'json',
+				type:'post',
+				success:function(r){
+					var res = r.resdata;
+					tmp = res.replace(/\n/g,"<br>");
+					 
+				 $("#resText").html(tmp);
+				}
+			})
+			
+			
+           $("#resText").scrollTop($("#resText")[0].scrollHeight);
+		}
+
+    };
+	</script>
+</html>
